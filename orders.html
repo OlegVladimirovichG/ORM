@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Заказы</title>
+</head>
+<body>
+    <h1>Заказы клиента</h1>
+    <h2>За последнюю неделю</h2>
+    <ul>
+        {% for product in latest_week_products %}
+            <li>{{ product.name }} - {{ product.order_date }}</li>
+        {% empty %}
+            <p>Заказов за последнюю неделю не найдено.</p>
+        {% endfor %}
+    </ul>
+    <h2>За последний месяц</h2>
+    <ul>
+        {% for product in latest_month_products %}
+            <li>{{ product.name }} - {{ product.order_date }}</li>
+        {% empty %}
+            <p>Заказов за последний месяц не найдено.</p>
+        {% endfor %}
+    </ul>
+    <h2>За последний год</h2>
+    <ul>
+        {% for product in latest_year_products %}
+            <li>{{ product.name }} - {{ product.order_date }}</li>
+        {% empty %}
+            <p>Заказов за последний год не найдено.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

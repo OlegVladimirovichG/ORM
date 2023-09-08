@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.utils import timezone
 from datetime import timedelta
-from .models import Client, Product, Order
+from my_app import Client, Product, Order
+
 
 def client_orders(request, client_id):
     client = Client.objects.get(id=client_id)
