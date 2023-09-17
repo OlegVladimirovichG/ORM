@@ -18,6 +18,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.PositiveIntegerField()
     adding_date = models.DateField()
+    photo = models.ImageField(upload_to='product_photos/')  # Добавляем поле для фотографии продукта
 
     def __str__(self):
         return self.name

@@ -27,3 +27,18 @@ def client_orders(request, client_id):
         'latest_year_products': latest_year_products
     }
     return render(request, 'orders.html', context)
+
+from django.shortcuts import render, redirect
+from .forms import ProductPhotoForm
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductPhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')  # Замените 'product_list' на URL вашего списка продуктов
+    else:
+        form = ProductPhotoForm()
+
+    return render(request, 'product_form.html', {'form': form})
+
