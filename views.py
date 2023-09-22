@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from datetime import timedelta
 from my_app import Client, Product, Order
@@ -27,3 +27,41 @@ def client_orders(request, client_id):
         'latest_year_products': latest_year_products
     }
     return render(request, 'orders.html', context)
+
+from django.shortcuts import render, redirect
+from .forms import ProductPhotoForm
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductPhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')  # Замените 'product_list' на URL вашего списка продуктов
+    else:
+        form = ProductPhotoForm()
+
+    return render(request, 'product_form.html', {'form': form})
+
+def client_list(request):
+    clients = Client.objects.all()
+    return render(request, 'client_list.html', {'clients': clients})
+
+def client_detail(request, client_id):
+    client = get_object_or_404(Client, pk=client_id)
+    return render(request, 'client_detail.html', {'client': client})
+
+def product_list(request):
+    products = Product.objects.all()
+    return render(request, 'product_list.html', {'products': products})
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'product_detail.html', {'product': product})
+
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    return render(request, 'order_detail.html', {'order': order})
+
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'order_list.html', {'orders': orders})
