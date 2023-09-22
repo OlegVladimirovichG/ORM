@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Информация о товаре: {{ product.name }}</h1>
+  <p>Описание: {{ product.description }}</p>
+  <p>Цена: {{ product.price }}</p>
+  <p>Количество: {{ product.quantity }}</p>
+  <p>Дата добавления: {{ product.adding_date }}</p>
+  <!-- Добавьте вывод фотографии товара, если вы её добавили в модель Product -->
+  {% if product.photo %}
+    <img src="{{ product.photo.url }}" alt="{{ product.name }}" width="200">
+  {% endif %}
+{% endblock %}
